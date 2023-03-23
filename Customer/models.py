@@ -4,9 +4,14 @@ from django.utils.translation import gettext_lazy as _
 
 
 def customer_number_unique():
-    rec = Customer.objects.all().count()
-    print(Customer.objects.all())
-    return f"CUSTOMER{str(rec).zfill(5-len(str(rec)))}"
+    customer_query = Customer.objects.all()
+    if customer_query:
+        invoice_count = max([int(i.customer_number[-5:]) if i else 0
+                            for i in customer_query])
+        invoice_count += 1
+    else:
+        invoice_count = 0
+    return f"INVOICE{str(invoice_count).zfill(5)}"
 
 
 class Customer(models.Model):

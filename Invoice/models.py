@@ -2,8 +2,14 @@ from django.db import models
 
 
 def invoice_number_unique():
-    rec = Invoice.objects.all().count()
-    return f"INVOICE{str(rec).zfill(5-len(str(rec)))}"
+    invoice_query = Invoice.objects.all()
+    if invoice_query:
+        invoice_count = max([int(i.invoice_number[-5:]) if i else 0
+                            for i in invoice_query])
+        invoice_count += 1
+    else:
+        invoice_count = 0
+    return f"INVOICE{str(invoice_count).zfill(5)}"
 
 
 class Invoice(models.Model):

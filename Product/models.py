@@ -4,8 +4,14 @@ from django.conf import settings
 
 
 def product_number_unique():
-    rec = Product.objects.all().count()
-    return f"PRODUCT{str(rec).zfill(5-len(str(rec)))}"
+    product_query = Product.objects.all()
+    if product_query:
+        invoice_count = max([int(i.product_number[-5:]) if i else 0
+                            for i in product_query])
+        invoice_count += 1
+    else:
+        invoice_count = 0
+    return f"INVOICE{str(invoice_count).zfill(5)}"
 
 
 class Product(models.Model):
