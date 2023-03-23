@@ -11,6 +11,7 @@ def get_due_product():
                                        customer__is_active__exact=True)
     due_product = []
     invoice_count = Invoice.objects.all().count()
+    print("Query Set")
     for rec in product_query.values():
         print(f"{rec}\n")
         customer_obj = Customer.objects.get(id=rec.get('customer_id', False))
