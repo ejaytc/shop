@@ -38,3 +38,8 @@ pipenv install -r ./requirements.txt
 python manage.py runscript tasks.tasks
 ```
    
+#### Note:
+
+I use [Dbeaver](https://dbeaver.io/) to view hidden fields to check if I got the expected output.
+![image](https://user-images.githubusercontent.com/52082222/227179883-4fa39ca6-947c-4ded-b251-0b094d6d0cc5.png)
+
